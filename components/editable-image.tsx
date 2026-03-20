@@ -1,7 +1,7 @@
 "use client"
 
 import { useEditMode } from './edit-mode-provider'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 interface EditableImageProps {
   id: string
@@ -23,15 +23,19 @@ export default function EditableImage({
   placeholder
 }: EditableImageProps) {
   const { isEditMode } = useEditMode()
-  const [imageSrc, setImageSrc] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const saved = window.localStorage.getItem(`editable-image-${id}`)
-      return saved || src
-    }
-    return src
-  })
+  const [imageSrc, setImageSrc] = useState(src)
   const [isHovered, setIsHovered] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  // Load saved image from localStorage on client side only
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const saved = window.localStorage.getItem(`editable-image-${id}`)
+      if (saved && saved !== src) {
+        setImageSrc(saved)
+      }
+    }
+  }, [id, src])
 
   // Save image to localStorage
   const saveImage = (src: string) => {
