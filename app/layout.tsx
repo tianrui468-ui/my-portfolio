@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="zh-CN" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
         <EditProvider>
-          <EditToggle />
+          {/* <EditToggle /> */}
           <CursorEffects />
           {children}
         </EditProvider>
