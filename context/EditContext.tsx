@@ -12,13 +12,17 @@ interface EditContextType {
 const EditContext = createContext<EditContextType | undefined>(undefined)
 
 export function EditProvider({ children }: { children: React.ReactNode }) {
-  const [isEditMode, setIsEditMode] = useState(() => {
+  const [isEditMode, setIsEditMode] = useState(false)
+
+  // Load edit mode from localStorage on client side only
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       const saved = window.localStorage.getItem('edit-mode')
-      return saved === 'true'
+      if (saved === 'true') {
+        setIsEditMode(true)
+      }
     }
-    return false
-  })
+  }, [])
 
   // Save edit mode to localStorage when it changes
   useEffect(() => {
