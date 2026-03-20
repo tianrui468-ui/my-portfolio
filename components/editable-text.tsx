@@ -24,15 +24,19 @@ export default function EditableText({
 }: EditableTextProps) {
   const { isEditMode } = useEditMode()
   const initialText = children || defaultValue || ''
-  const [text, setText] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const saved = window.localStorage.getItem(`editable-${id}`)
-      return saved !== null ? saved : initialText
-    }
-    return initialText
-  })
+  const [text, setText] = useState(initialText)
   const [isEditing, setIsEditing] = useState(false)
   const editableRef = useRef<any>(null)
+
+  // Load saved text from localStorage on client side only
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const saved = window.localStorage.getItem(`editable-${id}`)
+      if (saved !== null && saved !== initialText) {
+        setText(saved)
+      }
+    }
+  }, [id, initialText])
 
   // Save text to localStorage
   const saveText = (value: string) => {
