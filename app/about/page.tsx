@@ -11,12 +11,11 @@ import { User, Code, Palette, Coffee, Globe, Music, Book } from "lucide-react"
 export default function AboutPage() {
   const [contactDialogOpen, setContactDialogOpen] = useState(false)
   const skills = [
-    { name: "OA软件实施", level: 95, icon: <Code className="w-5 h-5" /> },
-    { name: "顾问式销售", level: 90, icon: <User className="w-5 h-5" /> },
-    { name: "客户关系维护", level: 85, icon: <User className="w-5 h-5" /> },
-    { name: "项目流程把控", level: 95, icon: <Book className="w-5 h-5" /> },
-    { name: "商务技能", level: 75, icon: <Book className="w-5 h-5" /> },
-    { name: "技术基础", level: 80, icon: <Code className="w-5 h-5" /> },
+    { name: "客户关系维护", level: 80, icon: <Code className="w-5 h-5" /> },
+    { name: "顾问式沟通", level: 80, icon: <User className="w-5 h-5" /> },
+    { name: "项目流程把控", level: 95, icon: <User className="w-5 h-5" /> },
+    { name: "OA软件实施", level: 95, icon: <Book className="w-5 h-5" /> },
+    { name: "技术基础", level: 90, icon: <Code className="w-5 h-5" /> },
   ]
 
   const interests = [
