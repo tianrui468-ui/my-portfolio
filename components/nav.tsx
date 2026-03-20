@@ -88,13 +88,13 @@ export default function Nav() {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 bg-warm-white/95 backdrop-blur-lg border-b shadow-lg">
-          <nav className="container mx-auto px-4 py-4 flex flex-col gap-4">
+        <div className="md:hidden absolute top-16 left-0 right-0 bg-white border-b shadow-xl z-50">
+          <nav className="container mx-auto px-4 py-4 flex flex-col gap-2">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`text-sm font-medium transition-colors px-4 py-3 rounded-lg ${isActive(link.href) ? 'bg-purple-accent text-white' : 'text-main-text/70 hover:text-main-text hover:bg-gray-100'}`}
+                className={`text-base font-medium transition-all px-5 py-3 rounded-lg ${isActive(link.href) ? 'bg-purple-accent text-white shadow-md' : 'text-gray-800 hover:text-purple-accent hover:bg-gray-50 border border-gray-100'}`}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <EditableText id={`nav-mobile-link-${link.name}`} as="span">
@@ -103,7 +103,7 @@ export default function Nav() {
               </Link>
             ))}
             <Button
-              className="bg-purple-accent hover:bg-purple-accent/90 text-white mt-2"
+              className="bg-purple-accent hover:bg-purple-accent/90 text-white mt-4 py-3 rounded-lg shadow-md"
               onClick={() => {
                 setContactDialogOpen(true)
                 setMobileMenuOpen(false)
