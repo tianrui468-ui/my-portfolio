@@ -1,12 +1,15 @@
 "use client"
 
+import { useState } from "react"
 import Nav from "@/components/nav"
 import { Button } from "@/components/ui/button"
 import EditableText from "@/components/editable-text"
 import EditableImage from "@/components/editable-image"
+import ContactDialog from "@/components/contact-dialog"
 import { User, Code, Palette, Coffee, Globe, Music, Book } from "lucide-react"
 
 export default function AboutPage() {
+  const [contactDialogOpen, setContactDialogOpen] = useState(false)
   const skills = [
     { name: "OA软件实施", level: 95, icon: <Code className="w-5 h-5" /> },
     { name: "顾问式销售", level: 90, icon: <User className="w-5 h-5" /> },
@@ -76,7 +79,7 @@ export default function AboutPage() {
                   size="sm"
                   variant="outline"
                   className="border-purple-accent text-purple-accent hover:bg-purple-accent/10"
-                  onClick={() => window.open('mailto:tianrui_mao@163.com', '_blank')}
+                  onClick={() => setContactDialogOpen(true)}
                 >
                   <EditableText id="about-button-contact">联系我</EditableText>
                 </Button>
@@ -193,6 +196,10 @@ export default function AboutPage() {
           <p className="mt-2 text-sm"><EditableText id="about-footer-tagline">用专业与热情服务客户</EditableText></p>
         </div>
       </footer>
+      <ContactDialog
+        open={contactDialogOpen}
+        onOpenChange={setContactDialogOpen}
+      />
     </div>
   )
 }
