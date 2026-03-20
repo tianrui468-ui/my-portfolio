@@ -17,6 +17,7 @@ export default function Nav() {
 
   const [scrolled, setScrolled] = useState(false)
   const [contactDialogOpen, setContactDialogOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,12 +73,50 @@ export default function Nav() {
         </Button>
 
         {/* Mobile Menu Button - Text Only */}
-        <Button variant="ghost" className="md:hidden">
+        <Button
+          variant="ghost"
+          className="md:hidden"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-expanded={mobileMenuOpen}
+          aria-label="切换菜单"
+        >
           <EditableText id="nav-mobile-menu-button" as="span">
             菜单
           </EditableText>
         </Button>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {mobileMenuOpen && (
+        <div className="md:hidden absolute top-16 left-0 right-0 bg-warm-white/95 backdrop-blur-lg border-b shadow-lg">
+          <nav className="container mx-auto px-4 py-4 flex flex-col gap-4">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`text-sm font-medium transition-colors px-4 py-3 rounded-lg ${isActive(link.href) ? 'bg-purple-accent text-white' : 'text-main-text/70 hover:text-main-text hover:bg-gray-100'}`}
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <EditableText id={`nav-mobile-link-${link.name}`} as="span">
+                  {link.name}
+                </EditableText>
+              </Link>
+            ))}
+            <Button
+              className="bg-purple-accent hover:bg-purple-accent/90 text-white mt-2"
+              onClick={() => {
+                setContactDialogOpen(true)
+                setMobileMenuOpen(false)
+              }}
+            >
+              <EditableText id="nav-mobile-contact-button" as="span">
+                联系我
+              </EditableText>
+            </Button>
+          </nav>
+        </div>
+      )}
+
       <ContactDialog
         open={contactDialogOpen}
         onOpenChange={setContactDialogOpen}
