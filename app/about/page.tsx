@@ -177,15 +177,6 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Philosophy Section */}
-        <div className="mt-12 rounded-2xl bg-gradient-to-r from-purple-accent/10 to-mint-green/10 p-8 md:p-12">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-2xl font-bold"><EditableText id="about-philosophy-title">我的理念</EditableText></h2>
-            <p className="mt-4 text-base text-main-text/70">
-              <EditableText id="about-philosophy-text">“我相信优秀的数字化解决方案应该像一次好的对话——清晰、直观且有意义。每一个流程设计，每一个实施决策都应该服务于客户业务需求，并提升企业的运营效率。”</EditableText>
-            </p>
-          </div>
-        </div>
       </main>
 
       {/* Footer */}
